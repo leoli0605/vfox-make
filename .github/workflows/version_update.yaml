@@ -1,0 +1,31 @@
+name: Update Make Versions
+
+on:
+    push:
+        branches:
+            - main
+    schedule:
+        - cron: '0 1 * * 6'
+    workflow_dispatch:
+
+jobs:
+    update-make-versions:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Run Docker to get Make versions
+              run: |
+                  docker run -v ${{ github.workspace }}:/output --rm condaforge/miniforge3 /bin/bash -c "
+                    apt update && apt install jq -y && conda search make --channel conda-forge | grep -oP 'make\s+\K[\d.]+' | sort | uniq | jq -R -s 'split(\"\n\")[:-1] | {versions: .}' > /output/versions.json
+                  "
+
+            - name: Commit and Push versions.json
+              run: |
+                  git config --local user.email "github-actions[bot]@users.noreply.github.com"
+                  git config --local user.name "github-actions[bot]"
+                  git add versions.json
+                  git diff --cached --quiet || git commit -m "Update versions.json"
+                  git push origin HEAD
