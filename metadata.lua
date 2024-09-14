@@ -3,15 +3,15 @@ PLUGIN = {}
 
 --- !!! MUST BE SET !!!
 --- Plugin name
-PLUGIN.name = "your plugin name"
+PLUGIN.name = "make"
 --- Plugin version
-PLUGIN.version = "0.0.1"
+PLUGIN.version = "0.1.0"
 --- Plugin homepage
-PLUGIN.homepage = "https://github.com/version-fox/vfox-plugin-template"
+PLUGIN.homepage = "https://github.com/leoli0605/vfox-make"
 --- Plugin license, please choose a correct license according to your needs.
 PLUGIN.license = "Apache 2.0"
 --- Plugin description
-PLUGIN.description = "your plugin description"
+PLUGIN.description = "GNU Make plugin for the vfox version manager"
 
 
 --- !!! OPTIONAL !!!
@@ -21,7 +21,7 @@ NOTE:
     If the plugin is not compatible with the current vfox version,
     vfox will not load the plugin and prompt the user to upgrade vfox.
  --]]
-PLUGIN.minRuntimeVersion = "0.3.0"
+PLUGIN.minRuntimeVersion = "0.5.0"
 --[[
 NOTE:
     If configured, vfox will check for updates to the plugin at this address,
